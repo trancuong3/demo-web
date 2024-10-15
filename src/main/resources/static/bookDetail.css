@@ -1,0 +1,48 @@
+/* styles.css */
+
+/* Cải thiện khoảng cách và định dạng văn bản */
+.container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hiệu ứng hình ảnh */
+.img-fluid {
+    transition: transform 0.3s;
+}
+
+.img-fluid:hover {
+    transform: scale(1.05);
+}
+
+/* Định dạng tiêu đề sách */
+h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Định dạng nút */
+.btn {
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 86, 179, 0.5);
+}
+.suggested-books .card {
+    height: 100%; /* Đảm bảo tất cả các thẻ card có chiều cao bằng nhau */
+}
+
+.suggested-books .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Căn giữa nội dung bên trong card */
+}
