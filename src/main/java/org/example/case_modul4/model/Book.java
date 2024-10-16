@@ -78,6 +78,7 @@ public class Book {
     }
 
 
+
     public Book(String title, String description, Integer price, Integer oldPrice, Integer buyTurn,
                 Integer quantity, Category category, Author author, String coverImage) {
         this.title = title;
