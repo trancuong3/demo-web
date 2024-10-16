@@ -25,11 +25,9 @@ public class Author {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Quan hệ với Book
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> books = new HashSet<>();
 
-    // Constructors
     public Author() {
     }
 
@@ -38,7 +36,6 @@ public class Author {
         this.birthday = birthday;
     }
 
-    // Getters and Setters
 
     @PrePersist
     protected void onCreate() {
@@ -59,7 +56,6 @@ public class Author {
         this.id = id;
     }
 
-    // Các getter và setter khác
 
     public String getNameAuthor() {
         return nameAuthor;
@@ -81,13 +77,11 @@ public class Author {
         return createdAt;
     }
 
-    // Không cần setter cho createdAt
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    // Không cần setter cho updatedAt
 
     public Set<Book> getBooks() {
         return books;

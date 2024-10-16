@@ -9,7 +9,6 @@ public class SupportController {
 
     @GetMapping("/support")
     public String supportPage(Model model) {
-        // Thêm logic cần thiết
         return "support";
     }
 }

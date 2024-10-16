@@ -86,7 +86,6 @@
   </div>
 </nav>
 
-<!-- Book Detail Container -->
 <div class="container book-detail-container mt-5 pt-5">
   <h1 th:text="${book.title}" class="text-center mb-4">Tiêu Đề Sách</h1>
 
@@ -111,7 +110,7 @@
     </div>
   </div>
 
-  <!-- Suggested Books Section -->
+
   <h3 class="mt-5">Sách Cùng Thể Loại</h3>
   <div class="row mt-3">
     <div class="col-md-4" th:each="suggestedBook : ${suggestedBooks}">
@@ -123,14 +122,14 @@
             <strong>Tác giả:</strong> <span th:text="${suggestedBook.author.nameAuthor}">Tên Tác Giả</span><br>
             <strong>Giá:</strong> <span th:text="'$' + ${suggestedBook.price}">Giá</span>
           </p>
-          <a th:href="@{/bookDetail/{id}(id=${suggestedBook.id})}" class="btn btn-primary">Xem Chi Tiết</a>
+          <a th:href="@{/books/{id}(id=${suggestedBook.id})}" class="btn btn-primary">Xem Chi Tiết</a>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<!-- JavaScript Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class CategoryService {
-    @Autowired  // Thêm dòng này
+    @Autowired
     private BookRepository bookRepository;
     @Autowired
     private CategoryRepository categoryRepository;
@@ -24,5 +24,5 @@ public class CategoryService {
 
     public Category getCategoryByName(String categoryName) {
         return categoryRepository.findByCategoryName(categoryName);
-    }   // Thêm các phương thức khác nếu cần
+    }
 }

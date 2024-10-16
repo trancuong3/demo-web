@@ -1,6 +1,4 @@
-/* styles.css */
 
-/* Cải thiện khoảng cách và định dạng văn bản */
 .container {
     background-color: #f8f9fa;
     padding: 30px;
@@ -8,7 +6,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Hiệu ứng hình ảnh */
 .img-fluid {
     transition: transform 0.3s;
 }
@@ -17,7 +14,7 @@
     transform: scale(1.05);
 }
 
-/* Định dạng tiêu đề sách */
+
 h1 {
     font-size: 2.5rem;
     color: #007bff;
@@ -28,7 +25,6 @@ h2 {
     color: #333;
 }
 
-/* Định dạng nút */
 .btn {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -38,44 +34,44 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 86, 179, 0.5);
 }
 .suggested-books .card {
-    height: 100%; /* Đảm bảo tất cả các thẻ card có chiều cao bằng nhau */
+    height: 100%;
 }
 
 .suggested-books .card-body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Căn giữa nội dung bên trong card */
+    justify-content: space-between;
 }
 .nav-link {
-    transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #007bff; /* Màu xanh khi hover */
+    color: #007bff;
 }
 .book-detail-container {
-    margin-top: 100px; /* Để tránh bị chồng lên thanh điều hướng */
+    margin-top: 100px;
 }
 
 .row {
-    margin-bottom: 20px; /* Khoảng cách giữa các hàng */
+    margin-bottom: 20px;
 }
 
 .col-md-6 {
-    padding: 15px; /* Thêm khoảng cách cho các cột */
+    padding: 15px;
 }
 
 h2 {
-    border-bottom: 2px solid #007bff; /* Thêm đường viền dưới tiêu đề thông tin sách */
-    padding-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
 }
 
 p {
-    line-height: 1.6; /* Tăng khoảng cách giữa các dòng */
+    line-height: 1.6;
 }
 .fixed-size-image {
-    width: 300px; /* Hoặc kích thước bạn mong muốn */
-    height: 400px; /* Hoặc kích thước bạn mong muốn */
-    object-fit: cover; /* Giữ nguyên tỷ lệ và cắt hình ảnh nếu cần thiết */
-    border-radius: 0.5rem; /* Tùy chọn: làm tròn các góc của hình ảnh */
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 0.5rem;
 }

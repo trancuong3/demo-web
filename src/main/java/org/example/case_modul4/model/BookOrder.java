@@ -6,14 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "orders") // Tên bảng là "orders"
+@Table(name = "orders")
 public class BookOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Quan hệ với User
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -30,7 +29,6 @@ public class BookOrder {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Quan hệ với OrderDetail
     @OneToMany(mappedBy = "bookOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails = new HashSet<>();
 
@@ -44,7 +42,6 @@ public class BookOrder {
         this.status = status;
     }
 
-    // Getters and Setters
 
     @PrePersist
     protected void onCreate() {
@@ -65,7 +62,6 @@ public class BookOrder {
         this.id = id;
     }
 
-    // Các getter và setter khác
 
     public User getUser() {
         return user;
@@ -95,13 +91,11 @@ public class BookOrder {
         return createdAt;
     }
 
-    // Không cần setter cho createdAt
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    // Không cần setter cho updatedAt
 
     public Set<OrderDetail> getOrderDetails() {
         return orderDetails;

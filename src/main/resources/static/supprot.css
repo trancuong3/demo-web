@@ -1,23 +1,23 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5; /* Nền sáng và nhẹ nhàng */
+    background-color: #f0f2f5;
 }
 
 .support-section {
-    background-color: #fff; /* Nền trắng cho phần hỗ trợ */
+    background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 30px; /* Tăng khoảng cách từ navbar */
+    margin-top: 30px;
 }
 
 h2 {
-    color: #007bff; /* Màu tiêu đề */
+    color: #007bff;
     font-weight: bold;
 }
 
 h5 {
-    color: #333; /* Màu cho các tiêu đề nhỏ */
+    color: #333;
 }
 
 .contact-info {
@@ -30,46 +30,46 @@ h5 {
 }
 
 .accordion-button {
-    background-color: #007bff; /* Màu nền cho nút accordion */
+    background-color: #007bff;
     color: #fff;
-    border-radius: 5px; /* Bo góc nút */
+    border-radius: 5px;
 }
 
 .accordion-button:hover {
-    background-color: #0056b3; /* Màu khi hover */
+    background-color: #0056b3;
 }
 
 .accordion-body {
-    background-color: #f8f9fa; /* Nền sáng cho body của accordion */
+    background-color: #f8f9fa;
 }
 
 .contact-form {
-    border: 1px solid #ced4da; /* Đường viền cho form */
+    border: 1px solid #ced4da;
     border-radius: 5px;
     padding: 20px;
-    background-color: #f9f9f9; /* Nền sáng cho form */
+    background-color: #f9f9f9;
 }
 
 .btn-primary {
-    background-color: #007bff; /* Màu nền của nút gửi */
+    background-color: #007bff;
     border-color: #007bff;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Màu khi hover nút */
+    background-color: #0056b3;
 }
 
 footer {
-    background-color: #f1f1f1; /* Nền sáng cho footer */
+    background-color: #f1f1f1;
     padding: 10px 0;
 }
 
 footer a {
-    color: #007bff; /* Màu link trong footer */
+    color: #007bff;
 }
 .nav-link {
-    color: black; /* Màu chữ bình thường */
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    color: black;
+    transition: color 0.3s ease;
 }
 
 

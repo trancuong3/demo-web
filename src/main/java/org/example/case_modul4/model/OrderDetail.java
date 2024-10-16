@@ -11,12 +11,10 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Quan hệ với BookOrder
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private BookOrder bookOrder;
 
-    // Quan hệ với Book
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
@@ -33,7 +31,6 @@ public class OrderDetail {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Constructors
     public OrderDetail() {
     }
 
@@ -44,7 +41,6 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    // Getters and Setters
 
     @PrePersist
     protected void onCreate() {
@@ -65,7 +61,6 @@ public class OrderDetail {
         this.id = id;
     }
 
-    // Các getter và setter khác
 
     public BookOrder getBookOrder() {
         return bookOrder;
@@ -103,11 +98,9 @@ public class OrderDetail {
         return createdAt;
     }
 
-    // Không cần setter cho createdAt
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    // Không cần setter cho updatedAt
 }

@@ -21,5 +21,4 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    // Thêm các phương thức khác nếu cần
 }

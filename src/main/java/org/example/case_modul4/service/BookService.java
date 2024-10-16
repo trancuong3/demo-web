@@ -35,10 +35,9 @@ public class BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Sách không tồn tại"));
 
-        // Kiểm tra category
         if (book.getCategory() != null) {
             String categoryName = book.getCategory().getCategoryName();
-            // Thực hiện các hành động với categoryName nếu cần
+
         }
 
         return book;
@@ -46,16 +45,13 @@ public class BookService {
 
 
     public List<Book> findSuggestedBooks(Category category) {
-        // Logic to find books based on category
-        // For example:
-        return bookRepository.findByCategory(category); // Adjust according to your repository structure
+
+        return bookRepository.findByCategory(category);
     }
     public List<String> findGenresByBookId(int categoryId) {
-        // Truy vấn từ cơ sở dữ liệu để lấy thể loại dựa trên categoryId
         String sql = "SELECT category_name FROM categories WHERE id = ?";
         List<String> genres = new ArrayList<>();
 
-        // Sử dụng PreparedStatement để thực hiện truy vấn
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setLong(1, categoryId);
@@ -69,7 +65,7 @@ public class BookService {
         return genres;
     }
     public List<Book> findBooksByTitleContaining(String title) {
-        return bookRepository.findByTitleContainingIgnoreCase(title); // Giả sử bạn có một repository
+        return bookRepository.findByTitleContainingIgnoreCase(title);
     }
 
 }

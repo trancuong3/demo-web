@@ -9,9 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Đảm bảo rằng các tài nguyên tĩnh được ánh xạ đúng
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
-        // Thêm các ánh xạ khác nếu cần
     }
 }
