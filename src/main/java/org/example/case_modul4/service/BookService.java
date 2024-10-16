@@ -68,5 +68,8 @@ public class BookService {
         }
         return genres;
     }
+    public List<Book> findBooksByTitleContaining(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title); // Giả sử bạn có một repository
+    }
 
 }

@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/static">Book Store</a>
+        <a class="navbar-brand" th:href="@{/static}">Book Store</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,8 +18,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/static">
-                        <i class="fas fa-home me-1"></i> Trang Chủ
+                    <a class="nav-link active" aria-current="page"  th:href="@{/static}">
+                        <i class="fas fa-home me-1" ></i> Trang Chủ
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -36,40 +36,44 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/bestsellers">
+                    <a class="nav-link" th:href="@{/bestsellers}">
                         <i class="fas fa-chart-line me-1"></i> Bán Chạy Nhất
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/weekly-discounts">
+                    <a class="nav-link" th:href="@{/weekly-discounts}">
                         <i class="fas fa-tags me-1"></i> Giảm Giá Hàng Tuần
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">
+                    <a class="nav-link" th:href="@{/login}">
                         <i class="fas fa-sign-in-alt me-1"></i> Đăng Nhập
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/signup">
+                    <a class="nav-link" th:href="@{/signup}">
                         <i class="fas fa-user-plus me-1"></i> Đăng Ký
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/support">
+                    <a class="nav-link" th:href="@{/support}">
                         <i class="fas fa-envelope me-1"></i> Hỗ Trợ
                     </a>
                 </li>
             </ul>
-            <form class="d-flex me-3" th:action="@{/search}" method="get">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm sách..." aria-label="Search" name="query">
+            <form class="d-flex me-3 position-relative" th:action="@{/search}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Tìm kiếm sách..." aria-label="Search" name="query" id="searchInput">
                 <button class="btn btn-outline-success" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
+                <div id="suggestions" class="list-group position-absolute" style="display: none; left: 0; right: 0; top: 100%;">
+                    <!-- Gợi ý sẽ được hiển thị ở đây -->
+                </div>
             </form>
+
             <ul class="navbar-nav">
                 <li class="nav-item me-3">
-                    <a class="nav-link position-relative" href="/favorites" title="Sản phẩm yêu thích">
+                    <a class="nav-link position-relative" th:href="@{/favorites}" title="Sản phẩm yêu thích">
                         <i class="fas fa-heart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
                             <span th:text="${favoriteItemCount}">0</span>
@@ -78,7 +82,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link position-relative" href="/cart" title="Giỏ hàng">
+                    <a class="nav-link position-relative" th:href="@{/cart}" title="Giỏ hàng">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
                             <span th:text="${cartItemCount}">0</span>
@@ -91,18 +95,17 @@
     </div>
 </nav>
 
-<!-- Carousel Section -->
+<!<!-- Carousel Section -->
 <div id="bookCarousel" class="carousel slide mt-5 pt-5" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/images/banner1.jpg" class="d-block w-100" alt="Banner 1">
-        </div>
+            <img th:src="@{/images/advertisement/p3.jpg}" class="img-fluid" alt="Banner 1" style="width: 750px; height: 285.71px; object-fit: contain;">
+            <img th:src="@{/images/advertisement/p6.jpg}" class="img-fluid" alt="Banner 1" style="width: 750px; height: 285.71px; object-fit: contain;">        </div>
         <div class="carousel-item">
-            <img src="/images/banner2.jpg" class="d-block w-100" alt="Banner 2">
+            <img th:src="@{/images/advertisement/p4.jpg}" class="img-fluid" alt="Banner 1" style="width: 750px; height: 285.71px; object-fit: contain;">
+            <img th:src="@{/images/advertisement/p5.jpg}" class="img-fluid" alt="Banner 1" style="width: 750px; height: 285.71px; object-fit: contain;">        </div>
         </div>
-        <div class="carousel-item">
-            <img src="/images/banner3.jpg" class="d-block w-100" alt="Banner 3">
-        </div>
+
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -114,14 +117,16 @@
     </button>
 </div>
 
-<!-- Book List Section -->
+
 <!-- Book List Section -->
 <div class="container mt-4">
+    <h2 class="mb-4 text-center">Sách Mới Nhất</h2>
     <div class="row">
         <div th:each="book : ${books}" class="col-md-3 mb-4">
             <a th:href="@{/books/{id}(id=${book.id})}" class="text-decoration-none text-dark">
                 <div class="card book-card h-100 shadow-sm">
-                    <img th:src="@{/images/${book.coverImage}}" alt="Cover image" class="card-img-top">
+                    <img th:src="${'/images/' + book.coverImage}" alt="Cover image" class="card-img-top">
+                    <!-- Thẻ <p> hiển thị URL hình ảnh bìa sách -->
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title" th:text="${book.title}">Tên Sách</h5>
                         <p class="card-text" th:text="${book.author}">Tên Tác Giả</p>
@@ -130,7 +135,7 @@
                         <form th:action="@{/toggle-favorite}" method="post" class="d-inline">
                             <input type="hidden" name="bookId" th:value="${book.id}" />
                             <button type="submit" class="btn btn-link text-danger p-0" title="Thích sản phẩm">
-                                <i class="fas fa-heart" th:classappend="${book.isFavorite ? 'text-danger' : 'text-muted'}"></i>
+                                <i class="fas fa-heart" th:classappend="${book.isFavorite} ? 'text-danger' : 'text-muted'"></i>
                             </button>
                         </form>
 
@@ -145,18 +150,73 @@
     </div>
 </div>
 
-
-
+<!-- Footer -->
+<!-- Footer -->
 <!-- Footer -->
 <footer class="bg-light text-center text-lg-start mt-5">
-    <div class="text-center p-3">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4">
+                <h5 class="text-uppercase">Về Chúng Tôi</h5>
+                <p>Cửa hàng sách của chúng tôi cung cấp một bộ sưu tập đa dạng các thể loại sách từ văn học, khoa học, đến sách cho trẻ em. Chúng tôi cam kết mang đến những sản phẩm chất lượng và dịch vụ tốt nhất cho khách hàng.</p>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-4">
+                <h5 class="text-uppercase">Dịch Vụ Khách Hàng</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a class="text-dark" th:href="@{/support}">Câu Hỏi Thường Gặp</a>
+                    </li>
+                    <li>
+                        <a class="text-dark" th:href="@{/support}">Chính Sách Vận Chuyển</a>
+                    </li>
+                    <li>
+                        <a class="text-dark" th:href="@{/support}">Chính Sách Đổi Trả</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-4">
+                <h5 class="text-uppercase">Theo Dõi Chúng Tôi</h5>
+                <div class="social-icons">
+                    <a class="text-dark me-3" href="https://facebook.com" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark me-3" href="https://twitter.com" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark me-3" href="https://instagram.com" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark" href="https://youtube.com" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Đăng Ký Nhận Bản Tin -->
+        <div class="row mt-4 newsletter-form">
+            <div class="col-md-12">
+                <h5 class="text-uppercase">Đăng Ký Nhận Bản Tin</h5>
+                <form th:action="@{/subscribe}" method="post" class="d-flex justify-content-center">
+                    <input type="email" class="form-control me-2" placeholder="Nhập địa chỉ email" aria-label="Email" name="email" required>
+                    <button  class="btn">Đăng Ký</button>
+                </form>
+                <p class="mt-2">Nhận thông tin cập nhật về sách mới và ưu đãi hấp dẫn từ chúng tôi!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center p-3 bg-light">
         © 2024 Cửa Hàng Sách:
-        <a class="text-dark" href="/static">yourbookstore.com</a>
+        <a class="text-dark" th:href="@{/}">yourbookstore.com</a>
     </div>
 </footer>
 
+
 <!-- JavaScript Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/script.js"></script> <!-- Thay đổi đường dẫn này cho đúng với vị trí của file script.js -->
+<script th:src="@{/script.js}"></script> <!-- Sử dụng Thymeleaf để xác định đường dẫn đúng -->
 </body>
 </html>
