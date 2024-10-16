@@ -34,7 +34,6 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    // Getter và Setter
 
     @ManyToOne
     @JoinColumn(name = "author_id")
@@ -51,11 +50,9 @@ public class Book {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails = new HashSet<>();
-   // Thêm thuộc tính thể loại
     private boolean isFavorite;
-    private String genres; // Thêm thuộc tính genres nếu cần
+    private String genres;
 
-    // Các phương thức getter và setter cho các thuộc tính khác
 
     public String getGenres() {
         return genres;
@@ -73,7 +70,6 @@ public class Book {
     public void setFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
     }
-    // Constructors
     public Book() {
     }
 
@@ -91,7 +87,6 @@ public class Book {
         this.author = author;
         this.coverImage = coverImage;
     }
-    // Getters and Setters
 
     @PrePersist
     protected void onCreate() {

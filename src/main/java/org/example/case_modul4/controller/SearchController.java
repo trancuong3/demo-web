@@ -16,7 +16,7 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    private BookService bookService; // Giả sử bạn có một service để lấy sách
+    private BookService bookService;
 
     @GetMapping("/suggestions")
     public ResponseEntity<List<Book>> getSuggestions(@RequestParam String query) {

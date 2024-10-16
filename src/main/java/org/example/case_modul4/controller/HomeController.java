@@ -21,14 +21,12 @@ public class HomeController {
     @Autowired
     private BookService bookService;
 
-    // Thêm categories vào model cho mọi phương thức
     @ModelAttribute
     public void addCategoriesToModel(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
     }
 
-    // Hiển thị trang chủ với tất cả sách
     @GetMapping("/static")
     public String homePage(Model model) {
         List<Book> books = bookService.getAllBooks();
@@ -36,14 +34,12 @@ public class HomeController {
         return "static";
     }
 
-    // Hiển thị sách theo danh mục
     @GetMapping("/categories/{categoryName}")
     public String getBooksByCategory(@PathVariable String categoryName, Model model) {
         Category selectedCategory = categoryService.getCategoryByName(categoryName);
         if (selectedCategory == null) {
-            // Xử lý khi không tìm thấy danh mục
             model.addAttribute("errorMessage", "Danh mục không tồn tại.");
-            return "error"; // Tạo một trang error.html hoặc xử lý theo cách bạn muốn
+            return "error";
         }
         List<Book> books = bookService.getBooksByCategory(selectedCategory);
         model.addAttribute("selectedCategory", selectedCategory);
@@ -56,8 +52,11 @@ public class HomeController {
         Book book = bookService.getBookDetails(id);
         model.addAttribute("book", book);
         model.addAttribute("category", book.getCategory()); // Thêm thể loại sách
-        return "bookDetail"; // Đảm bảo rằng bạn có file template bookDetail.html
+        List<Book> suggestedBooks = bookService.findSuggestedBooks(book.getCategory());
+        model.addAttribute("suggestedBooks", suggestedBooks);
+        return "bookDetail";
     }
 
-    // Các phương thức khác như /bestsellers, /weekly-discounts, etc.
+
+
 }
