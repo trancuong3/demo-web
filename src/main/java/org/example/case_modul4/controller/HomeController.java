@@ -51,7 +51,7 @@ public class HomeController {
     public String getBookDetails(@PathVariable int id, Model model) {
         Book book = bookService.getBookDetails(id);
         model.addAttribute("book", book);
-        model.addAttribute("category", book.getCategory()); // Thêm thể loại sách
+        model.addAttribute("category", book.getCategory());
         List<Book> suggestedBooks = bookService.findSuggestedBooks(book.getCategory());
         model.addAttribute("suggestedBooks", suggestedBooks);
         return "bookDetail";
