@@ -12,4 +12,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> findTop10ByOrderByBuyTurnDesc();
     List<Book> findByCategory(Category category);
     List<Book> findByTitleContainingIgnoreCase(String title);
+
+
 }

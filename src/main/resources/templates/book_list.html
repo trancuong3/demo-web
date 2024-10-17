@@ -110,8 +110,7 @@
 
 
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Sách Mới Nhất</h2>
-    <div class="row">
+    <h2 class="text-center mb-4" th:text="${selectedCategory != null} ? 'Sách thuộc danh mục: ' + ${selectedCategory.categoryName} : 'Sách Mới Nhất'">Sách Mới Nhất</h2>    <div class="row">
         <div th:each="book : ${books}" class="col-md-3 mb-4">
             <a th:href="@{/books/{id}(id=${book.id})}" class="text-decoration-none text-dark">
                 <div class="card book-card h-100 shadow-sm">
