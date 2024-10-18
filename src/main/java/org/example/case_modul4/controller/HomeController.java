@@ -2,7 +2,6 @@ package org.example.case_modul4.controller;
 
 import org.example.case_modul4.model.Book;
 import org.example.case_modul4.model.Category;
-import org.example.case_modul4.model.User;
 import org.example.case_modul4.service.BookService;
 import org.example.case_modul4.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,7 +31,7 @@ public class HomeController {
     public String homePage(Model model) {
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
-        return "static";
+        return "Home/static";
     }
 
     @GetMapping("/categories/{categoryName}")
@@ -46,7 +44,7 @@ public class HomeController {
         List<Book> books = bookService.getBooksByCategory(selectedCategory);
         model.addAttribute("selectedCategory", selectedCategory);
         model.addAttribute("books", books);
-        return "book_list";
+        return "Home/book_list";
     }
 
     @GetMapping("/books/{id}")
@@ -56,7 +54,7 @@ public class HomeController {
         model.addAttribute("category", book.getCategory());
         List<Book> suggestedBooks = bookService.findSuggestedBooks(book.getCategory());
         model.addAttribute("suggestedBooks", suggestedBooks);
-        return "bookDetail";
+        return "Home/bookDetail";
     }
 
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<div class="d-flex" id="wrapper">
+    <div class="bg-dark text-white" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4">
+            <img src="https://via.placeholder.com/50" class="rounded-circle mb-2" alt="Admin Image">
+            <h4>Admin Panel</h4>
+        </div>
+        <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users"></i> Quản lý User</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-box-open"></i> Quản lý sản phẩm</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-tie"></i> Quản lý tác giả</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chart-bar"></i> Thống kê</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">☰</button>
+            <h3 class="ml-3">Product List - Control Panel</h3>
+        </nav>
+
+        <div class="container-fluid mt-4">
+            <div class="d-flex justify-content-between mb-3 align-items-center">
+                <h2>Danh sách sản phẩm</h2>
+                <button class="btn btn-success"><i class="fas fa-plus-circle"></i> Thêm sản phẩm</button>
+            </div>
+            <table class="table table-hover table-bordered table-striped shadow-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Is Active?</th>
+                    <th>Is Deleted?</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><img src="https://via.placeholder.com/50" alt="Book Image" class="rounded"></td>
+                    <td>1</td>
+                    <td>Tiểu thuyết</td>
+                    <td>38925</td>
+                    <td>Xuân Qua Hạ Đến 2022</td>
+                    <td>230.0</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                    <td><span class="badge badge-danger">No</span></td>
+                    <td>
+                        <button class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+</body>
+</html>
