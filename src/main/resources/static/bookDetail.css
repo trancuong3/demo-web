@@ -76,3 +76,34 @@ p {
     border-radius: 0.5rem;
 }
 
+
+.suggested-books .card {
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.suggested-books .card:hover {
+    transform: scale(1.02);
+}
+
+.suggested-books .card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.suggested-books .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.suggested-books .btn {
+    width: 100%;
+}
+
+.suggested-books .card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+

@@ -2,6 +2,7 @@ package org.example.case_modul4.controller;
 
 import org.example.case_modul4.model.Book;
 import org.example.case_modul4.model.Category;
+import org.example.case_modul4.model.User;
 import org.example.case_modul4.service.BookService;
 import org.example.case_modul4.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -51,7 +53,7 @@ public class HomeController {
     public String getBookDetails(@PathVariable int id, Model model) {
         Book book = bookService.getBookDetails(id);
         model.addAttribute("book", book);
-        model.addAttribute("category", book.getCategory()); // Thêm thể loại sách
+        model.addAttribute("category", book.getCategory());
         List<Book> suggestedBooks = bookService.findSuggestedBooks(book.getCategory());
         model.addAttribute("suggestedBooks", suggestedBooks);
         return "bookDetail";

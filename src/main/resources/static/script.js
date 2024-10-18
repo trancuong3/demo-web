@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.getElementById('searchInput').addEventListener('input', function() {
+    document.getElementById('searchInput').addEventListener('input', function () {
         const query = this.value.toLowerCase();
         const suggestions = document.getElementById('suggestions');
         suggestions.innerHTML = '';
@@ -46,3 +46,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+function toggleFavorite(button, bookId) {
+    $.post('/toggle-favorite', { bookId: bookId })
+        .done(function () {
+            const heartIcon = $(button).find('i');
+            const favoriteCountBadge = $(button).closest('.book-card').find('.badge');
+
+            heartIcon.toggleClass('text-danger text-muted');
+
+            let count = parseInt(favoriteCountBadge.text()) || 0;
+            count = heartIcon.hasClass('text-danger') ? count + 1 : count - 1;
+            favoriteCountBadge.text(count);
+        })
+        .fail(function () {
+            console.error('Error toggling favorite status.');
+        });
+}
+
+
+
+
+
