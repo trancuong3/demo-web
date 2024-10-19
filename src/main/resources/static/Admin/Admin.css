@@ -1,15 +1,15 @@
 #sidebar-wrapper {
     width: 250px;
-    height: 100vh; /* Full height */
+    height: 100vh; 
     position: fixed;
     left: 0;
     top: 0;
     transition: all 0.3s;
-    z-index: 1000; /* Ensure it's above content */
+    z-index: 1000; 
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 80px; /* Shrink sidebar when toggled */
+    width: 80px; 
 }
 
 #sidebar-wrapper .list-group-item {
