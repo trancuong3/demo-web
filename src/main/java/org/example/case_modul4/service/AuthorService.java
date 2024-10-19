@@ -20,11 +20,8 @@ public class AuthorService {
     public Author saveAuthor(Author author) {
         return authorRepository.save(author);
     }
-
-
-
     public Author findById(int id) {
-        return authorRepository.findById(id).orElse(null); // Tìm tác giả theo ID
+        return authorRepository.findById(id).orElse(null);
     }
 
 }

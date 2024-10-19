@@ -32,6 +32,7 @@ public class BookService {
     public List<Book> getBooksByCategory(Category category) {
         return bookRepository.findByCategory(category);
     }
+
     public Book getBookDetails(int id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Sách không tồn tại"));
@@ -49,6 +50,7 @@ public class BookService {
 
         return bookRepository.findByCategory(category);
     }
+
     public List<String> findGenresByBookId(int categoryId) {
         String sql = "SELECT category_name FROM categories WHERE id = ?";
         List<String> genres = new ArrayList<>();
@@ -65,6 +67,7 @@ public class BookService {
         }
         return genres;
     }
+
     public List<Book> findBooksByTitleContaining(String title) {
         return bookRepository.findByTitleContainingIgnoreCase(title);
     }
@@ -72,6 +75,7 @@ public class BookService {
     public void deleteBookById(int id) {
         bookRepository.deleteById(id);
     }
+
     public void updateBook(Book book) {
         Optional<Book> existingBook = bookRepository.findById(book.getId());
         if (existingBook.isPresent()) {
@@ -87,5 +91,20 @@ public class BookService {
 
     public Book findById(int id) {
         return bookRepository.findById(id).orElse(null);
+    }
+
+    public void updateProduct(Book updatedBook) {
+        Optional<Book> existingBookOptional = bookRepository.findById(updatedBook.getId());
+        if (existingBookOptional.isPresent()) {
+            Book existingBook = existingBookOptional.get();
+            existingBook.setTitle(updatedBook.getTitle());
+            existingBook.setPrice(updatedBook.getPrice());
+            existingBook.setQuantity(updatedBook.getQuantity());
+            existingBook.setCategory(updatedBook.getCategory());
+            existingBook.setCoverImage(updatedBook.getCoverImage());
+            bookRepository.save(existingBook);
+        } else {
+            throw new RuntimeException("Book not found with ID: " + updatedBook.getId());
+        }
     }
 }

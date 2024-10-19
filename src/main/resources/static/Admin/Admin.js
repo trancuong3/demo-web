@@ -1,5 +1,4 @@
-
-    $(document).ready(function () {
+$(document).ready(function () {
     $('#searchInput').on('input', function () {
         var query = $(this).val();
 
@@ -7,7 +6,7 @@
             $.ajax({
                 url: '/search/suggestions',
                 type: 'GET',
-                data: { query: query },
+                data: {query: query},
                 success: function (data) {
                     $('#suggestions').empty().show();
 
@@ -25,8 +24,22 @@
         }
     });
     $(document).click(function (e) {
-    if (!$(e.target).closest('#searchInput').length) {
-    $('#suggestions').hide();
-}
+        if (!$(e.target).closest('#searchInput').length) {
+            $('#suggestions').hide();
+        }
+    });
 });
+
+$('#imageUrl').on('input', function () {
+    var imageUrl = $(this).val();
+    $('#previewImage').attr('src', imageUrl).show();
+});
+
+$(document).ready(function () {
+    $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#productList tr").filter(function () {
+            $(this).toggle($(this).data("title").indexOf(value) > -1);
+        });
+    });
 });

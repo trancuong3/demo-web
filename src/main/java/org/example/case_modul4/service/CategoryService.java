@@ -15,9 +15,11 @@ public class CategoryService {
     private BookRepository bookRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
     public List<Book> getBooksByCategory(Category category) {
         return bookRepository.findByCategory(category);
     }
@@ -27,10 +29,11 @@ public class CategoryService {
     }
 
     public Category findByName(String name) {
-        return categoryRepository.findByCategoryName(name); // Phương thức này cần được định nghĩa trong repository
+        return categoryRepository.findByCategoryName(name);
     }
 
     public Category findByCategoryName(String categoryName) {
         return categoryRepository.findByCategoryName(categoryName);
     }
+
 }

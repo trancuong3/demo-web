@@ -59,8 +59,8 @@ public class AdminController {
 
     @GetMapping("/addProduct")
     public String showAddProductForm(Model model) {
-        List<Author> authors = authorService.getAllAuthors(); // Giả sử bạn có phương thức này
-        List<Category> categories = categoryService.getAllCategories(); // Lấy danh sách thể loại
+        List<Author> authors = authorService.getAllAuthors();
+        List<Category> categories = categoryService.getAllCategories();
 
         model.addAttribute("authors", authors);
         model.addAttribute("categories", categories);
@@ -69,34 +69,31 @@ public class AdminController {
     }
 
 
-
     @PostMapping("/saveBook")
     public String saveBook(@RequestParam("title") String title,
-                           @RequestParam("author") int authorId, // Lấy ID của tác giả từ dropdown
+                           @RequestParam("author") int authorId,
                            @RequestParam("category") int categoryId,
                            @RequestParam("price") int price,
                            @RequestParam("quantity") int quantity,
                            @RequestParam("imageUrl") String imageUrl) {
 
-        Author author = authorService.findById(authorId); // Lấy đối tượng Author từ ID
+        Author author = authorService.findById(authorId);
         if (author == null) {
-            // Xử lý nếu không tìm thấy tác giả (nên có thông báo lỗi)
-            return "redirect:/addBook?error=authorNotFound"; // Redirect về trang thêm sách với thông báo lỗi
+            return "redirect:/addBook?error=authorNotFound";
         }
 
         Book book = new Book();
         book.setTitle(title);
-        book.setAuthor(author); // Sử dụng đối tượng Author
-        book.setCategory(new Category(categoryId)); // Thể loại sẽ được tạo trong dịch vụ
+        book.setAuthor(author);
+        book.setCategory(new Category(categoryId));
         book.setPrice(price);
         book.setQuantity(quantity);
-        book.setCoverImage(imageUrl); // Lưu URL hình ảnh
+        book.setCoverImage(imageUrl);
         book.setFavorite(false);
         bookService.saveBook(book);
 
-        return "redirect:/admin"; // Chuyển hướng về trang danh sách sản phẩm
+        return "redirect:/admin";
     }
-
 
 
 }

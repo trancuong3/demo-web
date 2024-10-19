@@ -33,6 +33,7 @@ h2 {
     background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 86, 179, 0.5);
 }
+
 .suggested-books .card {
     height: 100%;
 }
@@ -42,6 +43,7 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .nav-link {
     transition: color 0.3s ease;
 }
@@ -49,6 +51,7 @@ h2 {
 .nav-link:hover {
     color: #007bff;
 }
+
 .book-detail-container {
     margin-top: 100px;
 }
@@ -69,6 +72,7 @@ h2 {
 p {
     line-height: 1.6;
 }
+
 .fixed-size-image {
     width: 300px;
     height: 400px;
