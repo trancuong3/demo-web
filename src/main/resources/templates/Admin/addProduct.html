@@ -16,6 +16,16 @@
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="form-group">
+            <label for="author">Tác Giả:</label>
+            <select class="form-control" id="author" name="author" required>
+                <option value="">Chọn tác giả</option>
+                <th:block th:each="author : ${authors}">
+                    <option th:value="${author.id}" th:text="${author.nameAuthor}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="category">Thể loại:</label>
             <select class="form-control" id="category" name="category" required>
                 <option value="">Chọn thể loại</option>

@@ -25,7 +25,6 @@ public class Book {
 
     @Column(name = "old_price")
     private Integer oldPrice;
-
     @Column(name = "buy_turn")
     private Integer buyTurn;
 

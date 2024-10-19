@@ -21,4 +21,10 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
+
+
+    public Author findById(int id) {
+        return authorRepository.findById(id).orElse(null); // Tìm tác giả theo ID
+    }
+
 }
