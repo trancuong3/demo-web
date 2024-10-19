@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sách</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Thêm Sách</h2>
+    <form action="/saveBook" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Tên Sách:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Thể loại:</label>
+            <select class="form-control" id="category" name="category" required>
+                <option value="">Chọn thể loại</option>
+                <th:block th:each="category : ${categories}">
+                    <option th:value="${category.id}" th:text="${category.categoryName}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Số lượng:</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" required>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">URL Hình ảnh:</label>
+            <input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="Nhập URL hình ảnh" required>
+        </div>
+        <div class="form-group">
+            <label>Hình ảnh:</label><br>
+            <img id="previewImage" src="" alt="Hình ảnh" style="max-width: 300px; display: none;">
+        </div>
+        <button type="submit" class="btn btn-success">Thêm Sách</button>
+        <a href="/products" class="btn btn-secondary">Trở về</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $('#imageUrl').on('input', function() {
+        var imageUrl = $(this).val();
+        $('#previewImage').attr('src', imageUrl).show();
+    });
+</script>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,39 @@ public class AdminController {
         return "Admin/editProduct";
     }
 
+    @PostMapping("/updateProduct")
+    public String updateProduct(@ModelAttribute Book book, BindingResult result) {
+        if (result.hasErrors()) {
+            return "Admin/editProduct";
+        }
+        bookService.updateBook(book);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/addProduct")
+    public String showAddProductForm(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
+
+        return "Admin/addProduct";
+    }
+
+    @PostMapping("/saveBook")
+    public String saveBook(@RequestParam("title") String title,
+                           @RequestParam("category") int categoryId,
+                           @RequestParam("price") int price,
+                           @RequestParam("quantity") int quantity,
+                           @RequestParam("imageUrl") String imageUrl) {
+        Book book = new Book();
+        book.setTitle(title);
+        book.setCategory(new Category(categoryId));
+        book.setPrice(price);
+        book.setQuantity(quantity);
+        book.setCoverImage(imageUrl);
+        book.setFavorite(false);
+        bookService.saveBook(book);
+
+        return "redirect:/admin";
+    }
 
 
 }

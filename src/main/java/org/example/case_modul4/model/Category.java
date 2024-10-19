@@ -43,6 +43,9 @@ public class Category {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = this.createdAt;
     }
+    public Category(int id) {
+        this.id = id;
+    }
 
     @PreUpdate
     protected void onUpdate() {

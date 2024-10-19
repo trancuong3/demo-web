@@ -34,7 +34,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
+    private String categoryName;
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
@@ -73,7 +73,13 @@ public class Book {
     public Book() {
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
 
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public Book(String title, String description, Integer price, Integer oldPrice, Integer buyTurn,
                 Integer quantity, Category category, Author author, String coverImage) {
@@ -87,6 +93,7 @@ public class Book {
         this.author = author;
         this.coverImage = coverImage;
     }
+
 
     @PrePersist
     protected void onCreate() {

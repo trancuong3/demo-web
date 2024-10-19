@@ -81,6 +81,9 @@ public class BookService {
         }
     }
 
+    public void saveBook(Book book) {
+        bookRepository.save(book);
+    }
 
     public Book findById(int id) {
         return bookRepository.findById(id).orElse(null);
