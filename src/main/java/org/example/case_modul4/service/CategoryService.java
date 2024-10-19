@@ -25,4 +25,12 @@ public class CategoryService {
     public Category getCategoryByName(String categoryName) {
         return categoryRepository.findByCategoryName(categoryName);
     }
+
+    public Category findByName(String name) {
+        return categoryRepository.findByCategoryName(name); // Phương thức này cần được định nghĩa trong repository
+    }
+
+    public Category findByCategoryName(String categoryName) {
+        return categoryRepository.findByCategoryName(categoryName);
+    }
 }

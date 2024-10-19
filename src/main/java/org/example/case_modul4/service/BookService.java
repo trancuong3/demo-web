@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -68,6 +69,20 @@ public class BookService {
         return bookRepository.findByTitleContainingIgnoreCase(title);
     }
 
+    public void deleteBookById(int id) {
+        bookRepository.deleteById(id);
+    }
+    public void updateBook(Book book) {
+        Optional<Book> existingBook = bookRepository.findById(book.getId());
+        if (existingBook.isPresent()) {
+            bookRepository.save(book);
+        } else {
+            throw new EntityNotFoundException("Book not found with ID: " + book.getId());
+        }
+    }
 
 
+    public Book findById(int id) {
+        return bookRepository.findById(id).orElse(null);
+    }
 }

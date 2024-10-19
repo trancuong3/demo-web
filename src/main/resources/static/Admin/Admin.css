@@ -1,110 +1,107 @@
-/* Custom CSS for improved layout and design */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-#wrapper {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
 #sidebar-wrapper {
     width: 250px;
-    background-color: #343a40;
-    height: 100vh;
+    height: 100vh; /* Full height */
     position: fixed;
-    top: 0;
     left: 0;
-    overflow-y: auto;
+    top: 0;
     transition: all 0.3s;
+    z-index: 1000; /* Ensure it's above content */
 }
 
-.sidebar-heading {
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
+#wrapper.toggled #sidebar-wrapper {
+    width: 80px; /* Shrink sidebar when toggled */
 }
 
-.list-group-item {
-    border: none;
-    transition: background-color 0.2s ease;
+#sidebar-wrapper .list-group-item {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-.list-group-item:hover {
-    background-color: #495057;
+#wrapper.toggled #sidebar-wrapper .list-group-item {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #page-content-wrapper {
-    width: 100%;
     margin-left: 250px;
-    padding: 20px;
+    width: calc(100% - 250px);
+    transition: all 0.3s;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+ body {
+     font-family: 'Arial', sans-serif;
+ }
+
+#sidebar-wrapper {
+    width: 250px;
     height: 100vh;
-    overflow-y: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: all 0.3s;
+    z-index: 1000;
 }
 
-.toggled #sidebar-wrapper {
-    margin-left: -250px;
+#wrapper.toggled #sidebar-wrapper {
+    width: 80px;
 }
 
-.navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 20px;
+#sidebar-wrapper .list-group-item {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-.container-fluid {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#wrapper.toggled #sidebar-wrapper .list-group-item {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
 }
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-    font-weight: bold;
+#page-content-wrapper {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: all 0.3s;
 }
 
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    font-weight: bold;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    font-weight: bold;
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 80px;
+    width: calc(100% - 80px);
 }
 
 .table {
+    background-color: #fff;
     margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0 15px;
 }
 
-.table thead th {
-    background-color: #343a40;
-    color: #ffffff;
+.table td, .table th {
+    vertical-align: middle;
+    text-align: center;
 }
 
-.table-hover tbody tr:hover {
-    background-color: #f1f1f1;
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
 }
 
 .table img {
-    width: 50px;
+    width: 80px;
     height: auto;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
-.badge {
-    font-size: 0.9rem;
+.btn {
+    padding: 5px 10px;
+}
+
+.btn-success:hover, .btn-info:hover, .btn-danger:hover {
+    background-color: #007bff;
 }
 
 .badge-success {
@@ -114,3 +111,36 @@ body {
 .badge-danger {
     background-color: #dc3545;
 }
+
+
+.form-inline {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-inline input {
+    width: 300px;
+    margin-right: 10px;
+}
+
+#suggestions {
+    display: none;
+    z-index: 999;
+    border: 1px solid #ccc;
+    background: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+}
+
+#suggestions a {
+    padding: 10px;
+    display: block;
+    color: #000;
+    text-decoration: none;
+}
+
+#suggestions a:hover {
+    background-color: #f0f0f0;
+}
+
