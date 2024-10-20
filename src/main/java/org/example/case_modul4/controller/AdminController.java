@@ -40,21 +40,32 @@ public class AdminController {
     }
 
     @GetMapping("/editProduct/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model) {
-
+    public String editProduct(@PathVariable int id, Model model) {
+        System.out.println("ID received: " + id);
         Book book = bookService.findById(id);
+
+        if (book == null) {
+            System.out.println("Book not found for ID: " + id);
+            return "redirect:/404";
+        }
+
+        System.out.println("Book found: " + book);
         model.addAttribute("book", book);
         return "Admin/editProduct";
     }
 
+
+
     @PostMapping("/updateProduct")
-    public String updateProduct(@ModelAttribute Book book, BindingResult result) {
+    public String updateProduct(@ModelAttribute("book") Book book, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("book", book);
             return "Admin/editProduct";
         }
         bookService.updateBook(book);
         return "redirect:/admin";
     }
+
 
 
     @GetMapping("/addProduct")
@@ -78,14 +89,18 @@ public class AdminController {
                            @RequestParam("imageUrl") String imageUrl) {
 
         Author author = authorService.findById(authorId);
+        Category category = categoryService.findById(categoryId);
         if (author == null) {
             return "redirect:/addBook?error=authorNotFound";
+        }
+        if (category == null) {
+            return "redirect:/addBook?error=categoryNotFound";
         }
 
         Book book = new Book();
         book.setTitle(title);
         book.setAuthor(author);
-        book.setCategory(new Category(categoryId));
+        book.setCategory(category);
         book.setPrice(price);
         book.setQuantity(quantity);
         book.setCoverImage(imageUrl);
@@ -94,6 +109,7 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+
 
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -17,11 +18,28 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author saveAuthor(Author author) {
-        return authorRepository.save(author);
+    public void saveAuthor(Author author) {
+        if (author.getNameAuthor() == null || author.getNameAuthor().isEmpty()) {
+            throw new IllegalArgumentException("Tên tác giả không được để trống");
+        }
+        authorRepository.save(author);
     }
+
     public Author findById(int id) {
         return authorRepository.findById(id).orElse(null);
     }
 
+
+    public Author getAuthorById(int id) {
+        return authorRepository.findById(id).orElse(null);
+    }
+    public void deleteAuthor(int authorId) {
+        authorRepository.deleteById(authorId);
+    }
+    public Optional<Author> findAuthorById(int authorId) {
+        return authorRepository.findById(authorId);
+    }
+    public Author updateAuthor(Author author) {
+        return authorRepository.save(author);
+    }
 }

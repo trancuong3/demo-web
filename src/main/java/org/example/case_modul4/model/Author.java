@@ -1,6 +1,8 @@
 package org.example.case_modul4.model;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -15,6 +17,7 @@ public class Author {
     private Integer id;
 
     @Column(name = "name_author", nullable = false, length = 100)
+    @NotNull
     private String nameAuthor;
 
     private LocalDate birthday;

@@ -77,15 +77,29 @@ public class BookService {
     }
 
     public void updateBook(Book book) {
-        Optional<Book> existingBook = bookRepository.findById(book.getId());
-        if (existingBook.isPresent()) {
-            bookRepository.save(book);
+        if (book.getCategory() == null) {
+            throw new IllegalArgumentException("Category cannot be null");
+        }
+        Optional<Book> existingBookOptional = bookRepository.findById(book.getId());
+        if (existingBookOptional.isPresent()) {
+            Book existingBook = existingBookOptional.get();
+            existingBook.setTitle(book.getTitle());
+            existingBook.setPrice(book.getPrice());
+            existingBook.setQuantity(book.getQuantity());
+            existingBook.setCategory(book.getCategory());
+            existingBook.setCoverImage(book.getCoverImage());
+            bookRepository.save(existingBook);
         } else {
             throw new EntityNotFoundException("Book not found with ID: " + book.getId());
         }
     }
 
+
+
     public void saveBook(Book book) {
+        if (book.getCategory() == null) {
+            throw new IllegalArgumentException("Category cannot be null");
+        }
         bookRepository.save(book);
     }
 
@@ -106,5 +120,8 @@ public class BookService {
         } else {
             throw new RuntimeException("Book not found with ID: " + updatedBook.getId());
         }
+    }
+    public List<Book> getBooksByAuthor(int authorId) {
+        return bookRepository.findByAuthor_Id(authorId);
     }
 }

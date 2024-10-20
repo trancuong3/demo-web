@@ -30,10 +30,9 @@ public class Book {
 
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    private String categoryName;
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
@@ -72,13 +71,6 @@ public class Book {
     public Book() {
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
 
     public Book(String title, String description, Integer price, Integer oldPrice, Integer buyTurn,
                 Integer quantity, Category category, Author author, String coverImage) {
