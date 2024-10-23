@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.example.case_modul4.model.Book;
 import org.example.case_modul4.model.Category;
 import org.example.case_modul4.repository.BookRepository;
+import org.example.case_modul4.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -109,18 +111,30 @@ public class BookService {
 
     public void updateProduct(Book updatedBook) {
         Optional<Book> existingBookOptional = bookRepository.findById(updatedBook.getId());
+
         if (existingBookOptional.isPresent()) {
             Book existingBook = existingBookOptional.get();
+
             existingBook.setTitle(updatedBook.getTitle());
             existingBook.setPrice(updatedBook.getPrice());
             existingBook.setQuantity(updatedBook.getQuantity());
             existingBook.setCategory(updatedBook.getCategory());
             existingBook.setCoverImage(updatedBook.getCoverImage());
+
+            if (updatedBook.getCategory() != null && updatedBook.getCategory().getId() != null) {
+                existingBook.setCategory(updatedBook.getCategory());
+            } else {
+                throw new IllegalArgumentException("Category cannot be null or must have a valid ID");
+            }
+
+            existingBook.setCoverImage(updatedBook.getCoverImage());
+
             bookRepository.save(existingBook);
         } else {
             throw new RuntimeException("Book not found with ID: " + updatedBook.getId());
         }
     }
+
     public List<Book> getBooksByAuthor(int authorId) {
         return bookRepository.findByAuthor_Id(authorId);
     }

@@ -17,15 +17,15 @@
                  class="rounded-circle mb-2" alt="Admin Image">            <h4>Admin Panel</h4>
         </div>
         <div class="list-group list-group-flush">
-            <a href="/admin/users" class="list-group-item list-group-item-action bg-dark text-white">
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-users"></i> Quản lý User</a>
             <a href="/admin" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-box-open"></i> Quản lý sản phẩm</a>
             <a href="/authors" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-user-tie"></i> Quản lý tác giả</a>
-            <a href="/admin/orders" class="list-group-item list-group-item-action bg-dark text-white">
+            <a href="/orders" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
-            <a href="/admin/reports" class="list-group-item list-group-item-action bg-dark text-white">
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-chart-bar"></i> Thống kê</a>
             <a href="/logout" class="list-group-item list-group-item-action bg-dark text-white">
                 <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
@@ -65,12 +65,12 @@
                     </td>
                     <td>
                         <a th:href="@{/authors/edit/{authorId}(authorId=${author.id})}" class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i> Sửa
+                            <i class="fas fa-edit"></i> Edit
                         </a>
                         <form th:action="@{/authors/delete/{id}(id=${author.id})}" method="post" style="display:inline;">
                             <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Bạn có chắc chắn muốn xóa tác giả này?');">
-                                <i class="fas fa-trash-alt"></i> Xóa
+                                <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </form>
                     </td>

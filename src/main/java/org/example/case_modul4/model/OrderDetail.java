@@ -1,66 +1,58 @@
 package org.example.case_modul4.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "order_detail")
+@Table(name = "order_details")
 public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "order_id")
+    private int orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
+    @Column(name = "product_id")
+    private int productId;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "product_name", nullable = false)
+    private String productName;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "book_order_id")
     private BookOrder bookOrder;
+    @Column(nullable = false)
+    private Double price;
+
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @Column(nullable = false)
-    private Integer price;
-
-    @Column(nullable = false)
-    private Integer quantity;
-
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    public OrderDetail() {
-    }
-
-    public OrderDetail(BookOrder bookOrder, Book book, Integer price, Integer quantity) {
-        this.bookOrder = bookOrder;
-        this.book = book;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = this.createdAt;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     public BookOrder getBookOrder() {
         return bookOrder;
@@ -78,29 +70,23 @@ public class OrderDetail {
         this.book = book;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public Double getPrice() {
+        return price;
     }
 
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

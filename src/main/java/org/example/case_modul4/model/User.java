@@ -34,8 +34,7 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BookOrder> orders = new HashSet<>();
+
 
     public User() {
     }
@@ -119,11 +118,7 @@ public class User {
     }
 
 
-    public Set<BookOrder> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(Set<BookOrder> orders) {
-        this.orders = orders;
-    }
+
+
 }

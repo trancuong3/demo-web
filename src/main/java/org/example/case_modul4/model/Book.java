@@ -37,7 +37,7 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @Column(name = "coverImage", length = 500)
+    @Column(name = "coverImage")
     private String coverImage;
 
     @Column(name = "created_at", updatable = false)

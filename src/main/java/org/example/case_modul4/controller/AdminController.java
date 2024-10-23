@@ -9,10 +9,7 @@ import org.example.case_modul4.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -54,17 +51,22 @@ public class AdminController {
         return "Admin/editProduct";
     }
 
-
-
     @PostMapping("/updateProduct")
-    public String updateProduct(@ModelAttribute("book") Book book, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("book", book);
-            return "Admin/editProduct";
+    public String updateProduct(@ModelAttribute("book") Book book) {
+        String categoryName = book.getCategory().getCategoryName();
+        if (categoryName != null && !categoryName.isEmpty()) {
+            Category category = categoryService.findByName(categoryName);
+            if (category != null) {
+                book.setCategory(category);
+            } else {
+                throw new IllegalArgumentException("Category cannot be null");
+            }
         }
+
         bookService.updateBook(book);
         return "redirect:/admin";
     }
+
 
 
 

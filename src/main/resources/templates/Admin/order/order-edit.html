@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Chỉnh sửa Đơn hàng</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Chỉnh sửa Đơn hàng</h2>
+    <form th:action="@{/orders/edit}" method="post">
+        <input type="hidden" th:value="${order.id}" name="id" />
+
+        <div class="form-group">
+            <label>ID Người dùng</label>
+            <input type="text" class="form-control" th:value="${order.userId}" readonly />
+        </div>
+        <div class="form-group">
+            <label>Tên Người dùng</label>
+            <select class="form-control" name="userId" required>
+                <option th:value="${order.userId}" th:text="${order.userName}" selected="selected"></option>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Tổng tiền</label>
+            <input type="number" class="form-control" th:value="${order.total}" name="total" required />
+        </div>
+        <div class="form-group">
+            <label>Trạng thái</label>
+            <select class="form-control" name="status" required>
+                <option th:value="${order.status}" th:text="${order.status}" selected></option>
+                <option value="Processing">Processing</option>
+                <option value="Completed">Completed</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Số lượng</label>
+            <input type="number" class="form-control" th:value="${order.quantity}" name="quantity" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật Đơn hàng</button>
+        <a href="/orders" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
