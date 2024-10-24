@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0b0f1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            color: #4CAF50;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h1>Đăng Ký</h1>
+
+    <form th:action="@{/auth/register}" method="post">
+        <input type="text" name="name" placeholder="Tên" required> <!-- Thêm trường nhập tên -->
+        <input type="text" name="username" placeholder="Tên người dùng" required>
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Mật Khẩu" required>
+        <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+        <input type="text" name="gender" placeholder="Giới tính">
+        <input type="text" name="phone" placeholder="Số điện thoại">
+        <button type="submit">Đăng Ký</button>
+    </form>
+
+
+    </form>
+
+    <!-- Điều hướng đến trang đăng nhập -->
+    <p>Bạn đã có tài khoản? <a th:href="@{/auth/login}" class="login-link">Đăng nhập</a></p>
+</div>
+
+</body>
+</html>
