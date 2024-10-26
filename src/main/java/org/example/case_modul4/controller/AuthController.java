@@ -2,7 +2,7 @@ package org.example.case_modul4.controller;
 
 import org.example.case_modul4.model.User;
 import org.example.case_modul4.repository.UserRepository;
-import org.example.case_modul4.service.UserService;
+import org.example.case_modul4.service.UserService; // Nhập UserService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

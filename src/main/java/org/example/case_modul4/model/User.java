@@ -41,7 +41,6 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
     private String username;
-
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
