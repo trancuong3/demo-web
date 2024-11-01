@@ -158,3 +158,8 @@ body {
     max-width: 50px;
     height: auto;
 }
+.card img {
+    width: 100%;
+    height: 200px; /* Chiều cao bạn muốn ảnh có */
+    object-fit: cover; /* Đảm bảo ảnh giữ tỷ lệ mà không bị bóp méo */
+}

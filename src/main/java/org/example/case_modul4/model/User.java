@@ -15,7 +15,8 @@ public class User {
 
     @Column(nullable = false, length = 50)
     private String name;
-
+    @Column(nullable = false, unique = true, length = 100)
+    private String username;
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
@@ -40,7 +41,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
-    private String username;
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }

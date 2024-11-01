@@ -4,7 +4,7 @@ import org.example.case_modul4.model.Role;
 import org.example.case_modul4.model.User;
 import org.example.case_modul4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -15,28 +15,12 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
-    public void registerAdmin(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Tạo vai trò ADMIN và USER
-        Role adminRole = new Role("ROLE_ADMIN");
-        Role userRole = new Role("ROLE_USER");
 
-        // Gán vai trò cho người dùng
-        user.setRoles(new HashSet<>(Arrays.asList(adminRole, userRole)));
-        userRepository.save(user);
-    }
-
-    public void registerUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Mã hóa mật khẩu
-        user.setRoles(new HashSet<>(Arrays.asList(new Role("ROLE_USER")))); // Gán vai trò USER
-        userRepository.save(user);
-    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll(); // Lấy danh sách tất cả người dùng
@@ -49,4 +33,21 @@ public class UserService {
             throw new IllegalArgumentException("Người dùng không tồn tại với ID: " + id);
         }
     }
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public void updateUser(Integer id, User user) {
+        if (userRepository.existsById(id)) {
+            user.setId(id);
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("User không tồn tại với ID: " + id);
+        }
+    }
+
 }

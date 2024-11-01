@@ -1,5 +1,6 @@
 package org.example.case_modul4.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.case_modul4.model.Author;
 import org.example.case_modul4.model.Book;
 import org.example.case_modul4.model.Category;
@@ -23,13 +24,22 @@ public class AdminController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping("/admin")
-    public String adminPage(Model model) {
-        List<Book> books = bookService.getAllBooks();
-        model.addAttribute("books", books);
-        return "Admin/admin";
-    }
 
+
+    @GetMapping("/admin")
+    public String adminPage(HttpSession session, Model model) {
+        // Kiểm tra trạng thái đăng nhập
+        Boolean loggedIn = (Boolean) session.getAttribute("loggedIn");
+        if (loggedIn != null && loggedIn) {
+
+            List<Book> books = bookService.getAllBooks();
+            model.addAttribute("books", books);
+            return "Admin/admin"; // Trả về trang quản trị nếu đã đăng nhập
+        } else {
+            return "redirect:/login"; // Chuyển đến trang login nếu chưa đăng nhập
+        }
+
+    }
     @PostMapping("/deleteBook/{id}")
     public String deleteBook(@PathVariable("id") int id) {
         bookService.deleteBookById(id);

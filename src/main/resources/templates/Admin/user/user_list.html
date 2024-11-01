@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Danh sách Tác giả</title>
+    <title>Quản lý User</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="/Admin/admin.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -17,81 +16,75 @@
                  class="rounded-circle mb-2" alt="Admin Image">            <h4>Admin Panel</h4>
         </div>
         <div class="list-group list-group-flush">
-            <a href="/users" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-users"></i> Quản lý User</a>
-            <a href="/admin" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-box-open"></i> Quản lý sản phẩm</a>
-            <a href="/authors" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-user-tie"></i> Quản lý tác giả</a>
-            <a href="/orders" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
-            <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-chart-bar"></i> Thống kê</a>
-            <a href="/login" class="list-group-item list-group-item-action bg-dark text-white">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-users"></i>
+                Quản lý User</a>
+            <a href="/admin" class="list-group-item list-group-item-action bg-dark text-white"><i
+                    class="fas fa-box-open"></i> Quản lý sản phẩm</a>
+            <a href="/authors" class="list-group-item list-group-item-action bg-dark text-white"><i
+                    class="fas fa-user-tie"></i> Quản lý tác giả</a>
+            <a href="/orders" class="list-group-item list-group-item-action bg-dark text-white"><i
+                    class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i
+                    class="fas fa-chart-bar"></i> Thống kê</a>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</a>
         </div>
     </div>
-
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <h2 class="mt-4">Danh sách Tác giả</h2>
-            <a href="/authors/add" class="btn btn-primary mb-3">
-                <i class="fas fa-plus"></i> Thêm Tác giả
-            </a>
-            <form class="d-flex mb-3">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm tác giả..." aria-label="Search" id="searchInput">
-                <button class="btn btn-outline-success" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-
-            <table class="table table-striped table-hover" id="authorsTable">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên Tác giả</th>
-                    <th>Tác phẩm</th>
-                    <th>Thao tác</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="author : ${authors}">
-                    <td th:text="${author.id}"></td>
-                    <td th:text="${author.nameAuthor}"></td>
-                    <td>
-                        <a th:href="@{/authors/{authorId}(authorId=${author.id})}" class="btn btn-info btn-sm">
-                            <i class="fas fa-book"></i> Xem tác phẩm
-                        </a>
-                    </td>
-                    <td>
-                        <a th:href="@{/authors/edit/{authorId}(authorId=${author.id})}" class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <form th:action="@{/authors/delete/{id}(id=${author.id})}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Bạn có chắc chắn muốn xóa tác giả này?');">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="container">
+    <h2 class="mt-4">Danh sách Người dùng</h2>
+    <a th:href="@{/users/add}" class="btn btn-primary mb-3">
+        <i class="fas fa-plus"></i> Thêm Người dùng
+    </a>
+    <form class="d-flex mb-3">
+        <input class="form-control me-2" type="search" placeholder="Tìm kiếm người dùng..." aria-label="Search" id="searchInput">
+        <button class="btn btn-outline-success" type="button">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+    <table class="table table-striped table-hover" id="userTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Giới tính</th>
+            <th>Số điện thoại</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.phone}"></td>
+            <td>
+                <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Sửa
+                </a>
+                <form th:action="@{/users/delete/{id}(id=${user.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                        <i class="fas fa-trash-alt"></i> Xóa
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#searchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#authorsTable tbody tr").filter(function() {
+            $("#userTable tbody tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
 </script>
-<script src="/Admin/Admin.js"></script>
 </body>
 </html>

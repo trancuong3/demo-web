@@ -5,6 +5,8 @@ import org.example.case_modul4.model.Category;
 import org.example.case_modul4.service.BookService;
 import org.example.case_modul4.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +22,12 @@ public class HomeController {
 
     @Autowired
     private BookService bookService;
-
     @ModelAttribute
     public void addCategoriesToModel(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
     }
+
 
     @GetMapping("/static")
     public String homePage(Model model) {

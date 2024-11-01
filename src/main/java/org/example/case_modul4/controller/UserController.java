@@ -1,27 +1,58 @@
 package org.example.case_modul4.controller;
 
+
+import org.example.case_modul4.model.User;
 import org.example.case_modul4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    // Phương thức xử lý xóa người dùng
-    @PostMapping("/users/delete/{id}")
-    public String deleteUser(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
-        try {
-            userService.deleteUserById(id); // Xóa người dùng với ID được truyền vào
-            redirectAttributes.addFlashAttribute("message", "Xóa người dùng thành công!");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Xóa người dùng thất bại. Người dùng này có thể không tồn tại.");
-        }
-        return "redirect:/users"; // Điều hướng về danh sách người dùng sau khi xóa
+    @GetMapping
+    public String listUsers(Model model) {
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "Admin/user/user_list";
+    }
+
+    @GetMapping("/add")
+    public String addUserForm(Model model) {
+        model.addAttribute("user", new User());
+        return "Admin/user/user_form";
+    }
+
+    @PostMapping("/add")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editUserForm(@PathVariable Integer id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "Admin/user/user_edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateUser(@PathVariable Integer id, @ModelAttribute("user") User user) {
+        userService.updateUser(id, user);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        userService.deleteUserById(id);
+        return "redirect:/users";
     }
 }
